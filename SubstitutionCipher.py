@@ -31,7 +31,6 @@ toolbox.register("compile", gp.compile, pset=pset)
 char_examples = [
     ("abcdefghijklmnopqrstuvwxyz", "zyxwvutsrqponmlkjihgfedcba", "s"),
     ("abc","cba","c"),
-    # ("yhk","pcd","f"),
     # ("yhk","pcd","c")
 ]
 
@@ -52,14 +51,14 @@ toolbox.register("mate", gp.cxOnePoint)
 toolbox.register("expr_mut", gp.genHalfAndHalf, min_=0, max_=2)
 toolbox.register("mutate", gp.mutUniform, expr=toolbox.expr_mut, pset=pset)
 
-# toolbox.decorate("mate", gp.staticLimit(key=operator.attrgetter("height"), max_value=17)) # maximum height of a tree after mate
-# toolbox.decorate("mutate", gp.staticLimit(key=operator.attrgetter("height"), max_value=17)) # maximum height of a tree after mutate
+toolbox.decorate("mate", gp.staticLimit(key=operator.attrgetter("height"), max_value=17)) # maximum height of a tree after mate
+toolbox.decorate("mutate", gp.staticLimit(key=operator.attrgetter("height"), max_value=17)) # maximum height of a tree after mutate
 
 def main():
     # random.seed(318)
 
     # Sets the population size to 300.
-    pop = toolbox.population(n=300)
+    pop = toolbox.population(n=1000)
     # Tracks the single best individual over the entire run.
     hof = tools.HallOfFame(1)
 
@@ -72,7 +71,7 @@ def main():
     mstats.register("max", numpy.max)
 
     # Does the run, going for 40 generations (the 5th argument to `eaSimple`).
-    pop, log = algorithms.eaSimple(pop, toolbox, 0.5, 0.1, 40, stats=mstats,
+    pop, log = algorithms.eaSimple(pop, toolbox, 0.5, 0.1, 100, stats=mstats,
                                    halloffame=hof, verbose=True)
 
     # print log
@@ -97,20 +96,47 @@ def main():
     print("Decoded string: ", output_str, "\nExpected string:  helloworld")
     return pop, log, hof
 
-    # print("Decoded message:", func("abcdefghijklmnopqrstuvwxyz", "zyxwvutsrqponmlkjihgfedcba", "svool dliow"))
-    # print("Decoded message:", func("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "ZYXWVUTSRQPONMLKJIHGFEDCBA", "HELLO WORLD"))  
-    # print("Decoded message:", func("abc", "xyz", "cab"))
+def plot_gp_data(log, hof):
+    # Extract data from the log
+    gen = log.select("gen")  # Generations
+    avg_fitness = log.chapters["fitness"].select("avg")  # Average fitness
+    min_fitness = log.chapters["fitness"].select("min")  # Minimum fitness
+    max_fitness = log.chapters["fitness"].select("max")  # Maximum fitness
+    avg_size = log.chapters["size"].select("avg")  # Average tree size
+    min_size = log.chapters["size"].select("min")  # Minimum tree size
+    max_size = log.chapters["size"].select("max")  # Maximum tree size
 
-if __name__ == "__main__":
-    pop, log, hof = main()  # Capture the returned hof object
+    # Plot fitness metrics
+    plt.figure(figsize=(10, 6))
+    plt.plot(gen, avg_fitness, label="Average Fitness", marker="o")
+    plt.plot(gen, min_fitness, label="Minimum Fitness", marker="o")
+    plt.plot(gen, max_fitness, label="Maximum Fitness", marker="o")
+    plt.xlabel("Generation")
+    plt.ylabel("Fitness")
+    plt.title("Fitness Over Generations")
+    plt.legend()
+    plt.grid()
+    plt.show()
 
-    # Visualize the best individual
-    import matplotlib.pyplot as plt
-    import networkx as nx
+    # Plot tree size metrics
+    plt.figure(figsize=(10, 6))
+    plt.plot(gen, avg_size, label="Average Tree Size", marker="o")
+    plt.plot(gen, min_size, label="Minimum Tree Size", marker="o")
+    plt.plot(gen, max_size, label="Maximum Tree Size", marker="o")
+    plt.xlabel("Generation")
+    plt.ylabel("Tree Size")
+    plt.title("Tree Size Over Generations")
+    plt.legend()
+    plt.grid()
+    plt.show()
 
-    nodes, edges, labels = gp.graph(hof[0])  # Use hof[0] here
+    nodes, edges, labels = gp.graph(hof[0])
     g = nx.Graph()
     g.add_edges_from(edges)
     pos = nx.spring_layout(g)
     nx.draw(g, pos, with_labels=True, labels=labels, node_size=5000, node_color="lightblue")
     plt.show()
+
+if __name__ == "__main__":
+    pop, log, hof = main()
+    plot_gp_data(log, hof)
