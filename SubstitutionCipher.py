@@ -31,7 +31,9 @@ toolbox.register("compile", gp.compile, pset=pset)
 char_examples = [
     ("abcdefghijklmnopqrstuvwxyz", "zyxwvutsrqponmlkjihgfedcba", "s"),
     ("abc","cba","c"),
-    # ("yhk","pcd","c")
+    ("yhk","pcd","h"),
+    ("abcdhjkl","hjklabcd", "h"),
+    ("python", "apples", "n")
 ]
 
 def evalCipher(individual):
@@ -51,14 +53,14 @@ toolbox.register("mate", gp.cxOnePoint)
 toolbox.register("expr_mut", gp.genHalfAndHalf, min_=0, max_=2)
 toolbox.register("mutate", gp.mutUniform, expr=toolbox.expr_mut, pset=pset)
 
-toolbox.decorate("mate", gp.staticLimit(key=operator.attrgetter("height"), max_value=17)) # maximum height of a tree after mate
-toolbox.decorate("mutate", gp.staticLimit(key=operator.attrgetter("height"), max_value=17)) # maximum height of a tree after mutate
+toolbox.decorate("mate", gp.staticLimit(key=operator.attrgetter("height"), max_value=10)) # maximum height of a tree after mate
+toolbox.decorate("mutate", gp.staticLimit(key=operator.attrgetter("height"), max_value=10)) # maximum height of a tree after mutate
 
 def main():
     # random.seed(318)
 
     # Sets the population size to 300.
-    pop = toolbox.population(n=1000)
+    pop = toolbox.population(n=500)
     # Tracks the single best individual over the entire run.
     hof = tools.HallOfFame(1)
 
@@ -71,7 +73,7 @@ def main():
     mstats.register("max", numpy.max)
 
     # Does the run, going for 40 generations (the 5th argument to `eaSimple`).
-    pop, log = algorithms.eaSimple(pop, toolbox, 0.5, 0.1, 100, stats=mstats,
+    pop, log = algorithms.eaSimple(pop, toolbox, 0.5, 0.3, 100, stats=mstats,
                                    halloffame=hof, verbose=True)
 
     # print log
@@ -93,7 +95,7 @@ def main():
     output_str = ""
     for char in range(len(encoded)):
         output_str += func(str1, str2, encoded[char])
-    print("Decoded string: ", output_str, "\nExpected string:  helloworld")
+    print("Input string: ", encoded ,"\nDecoded string: ", output_str, "\nExpected string:  helloworld")
     return pop, log, hof
 
 def plot_gp_data(log, hof):
