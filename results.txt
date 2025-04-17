@@ -1,2 +1,21 @@
-run_number,avg_fitness,gen_max,gen_min,avg_size
-1,2.24,5,0,5.44
+run_number|avg_fitness|gen_max|gen_min|avg_size|evolved_result
+1|2.02333|5|0|5.08667|char_at(find_char(ARG2, ARG0), ARG1)
+2|0.636667|5|0|34.18|char_at(find_char(ARG2, ARG0), ARG1)
+3|0.816667|5|0|35.4733|char_at(find_char(ARG2, ARG0), ARG1)
+4|2.32667|5|0|5.32|char_at(find_char(ARG2, ARG0), ARG1)
+5|2.21667|5|0|5.24667|char_at(find_char(ARG2, ARG2), char_at(find_char(ARG2, ARG0), ARG1))
+6|0.59|5|0|44.3333|char_at(find_char(ARG2, ARG0), ARG1)
+7|1.78333|5|0|15.2867|char_at(find_char(ARG2, ARG0), ARG1)
+8|2.07|5|0|5.06|char_at(find_char(ARG2, ARG0), ARG1)
+9|0.52|5|0|40.0333|char_at(find_char(ARG2, ARG0), ARG1)
+10|0.766667|5|0|44.2467|char_at(find_char(ARG2, ARG0), ARG1)
+11|0.593333|5|0|50.4267|char_at(find_char(ARG2, ARG0), ARG1)
+12|0.41|5|0|55.5133|char_at(find_char(char_at(find_char(ARG2, ARG0), char_at(16, ARG0)), ARG1), char_at(find_char(ARG2, ARG0), ARG1))
+13|2.13|5|0|5.38|char_at(find_char(ARG2, ARG0), ARG1)
+14|0.523333|5|0|47.6467|char_at(find_char(ARG2, ARG0), ARG1)
+15|2.21|5|0|5.34|char_at(find_char(ARG2, ARG0), ARG1)
+16|1.04|5|0|26.5067|char_at(find_char(ARG2, ARG0), ARG1)
+17|0.703333|5|0|53.16|char_at(find_char(ARG2, ARG0), ARG1)
+18|0.68|5|0|45.3133|char_at(find_char(ARG2, ARG0), ARG1)
+19|2.38|5|0|5.35333|char_at(find_char(ARG2, ARG0), ARG1)
+20|2.32667|5|0|5.09333|char_at(find_char(ARG2, ARG0), ARG1)

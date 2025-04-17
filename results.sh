@@ -7,7 +7,7 @@
 
 num_runs=20
 
-echo "run_number,avg_fitness,gen_max,gen_min,avg_size,evolved_result" > results.txt # overwrites old file and starts with column names
+echo "run_number|avg_fitness|gen_max|gen_min|avg_size|evolved_result" > results.txt # overwrites old file and starts with column names
 
 for run in $(seq 1 $num_runs); do
     echo "Starting Run $run"
@@ -20,5 +20,5 @@ for run in $(seq 1 $num_runs); do
     gen_min=$(echo "$result" | awk '{print $6}')
     avg_size=$(echo "$result" | awk '{print $9}')
 
-    echo "$run,$avg_fitness,$gen_max,$gen_min,$avg_size,$evolved_result" >> results.txt
+    echo "$run|$avg_fitness|$gen_max|$gen_min|$avg_size|$evolved_result" >> results.txt
 done
