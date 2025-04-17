@@ -5,7 +5,7 @@
 # Average fitness of the population.
 # (Optional) Size or complexity of the best individual.
 
-num_runs=10
+num_runs=20
 
 echo "run_number,avg_fitness,gen_max,gen_min,avg_size" > results.txt # overwrites old file and starts with column names
 
