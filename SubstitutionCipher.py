@@ -60,7 +60,7 @@ def main():
     # random.seed(318)
 
     # Sets the population size to 300.
-    pop = toolbox.population(n=500)
+    pop = toolbox.population(n=300)
     # Tracks the single best individual over the entire run.
     hof = tools.HallOfFame(1)
 
@@ -82,20 +82,20 @@ def main():
     print("\nBest individual:")
     print(hof[0])
     func = toolbox.compile(expr=hof[0])
-    for example in char_examples:
-        str1, str2, encoded = example
-        table = str.maketrans(str1, str2)
-        expected = encoded.translate(table)
-        print("Decoded message:", func(str1,str2,encoded), "expected message: ", expected)
+    # for example in char_examples:
+    #     str1, str2, encoded = example
+    #     table = str.maketrans(str1, str2)
+    #     expected = encoded.translate(table)
+    #     print("Decoded message:", func(str1,str2,encoded), "expected message: ", expected)
     
-    print("======")
+    # print("======")
     
-    string_cipher_example = ("abcdefghijklmnopqrstuvwxyz", "zyxwvutsrqponmlkjihgfedcba", "svooldliow")
-    str1, str2, encoded = string_cipher_example
-    output_str = ""
-    for char in range(len(encoded)):
-        output_str += func(str1, str2, encoded[char])
-    print("Input string: ", encoded ,"\nDecoded string: ", output_str, "\nExpected string:  helloworld")
+    # string_cipher_example = ("abcdefghijklmnopqrstuvwxyz", "zyxwvutsrqponmlkjihgfedcba", "svooldliow")
+    # str1, str2, encoded = string_cipher_example
+    # output_str = ""
+    # for char in range(len(encoded)):
+    #     output_str += func(str1, str2, encoded[char])
+    # print("Input string: ", encoded ,"\nDecoded string: ", output_str, "\nExpected string:  helloworld")
     return pop, log, hof
 
 def plot_gp_data(log, hof):
@@ -141,4 +141,4 @@ def plot_gp_data(log, hof):
 
 if __name__ == "__main__":
     pop, log, hof = main()
-    plot_gp_data(log, hof)
+    # plot_gp_data(log, hof)
