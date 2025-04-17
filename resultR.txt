@@ -1,0 +1,10 @@
+   run_number     avg_fitness        gen_max     gen_min     avg_size      evolved_result    
+ Min.   : 1.00   Min.   :0.4100   Min.   :5   Min.   :0   Min.   : 5.060   Length:20         
+ 1st Qu.: 5.75   1st Qu.:0.6258   1st Qu.:5   1st Qu.:0   1st Qu.: 5.335   Class :character  
+ Median :10.50   Median :0.9283   Median :5   Median :0   Median :30.343   Mode  :character  
+ Mean   :10.50   Mean   :1.3373   Mean   :5   Mean   :0   Mean   :26.700                     
+ 3rd Qu.:15.25   3rd Qu.:2.1500   3rd Qu.:5   3rd Qu.:0   3rd Qu.:44.578                     
+ Max.   :20.00   Max.   :2.3800   Max.   :5   Max.   :0   Max.   :55.513                     
+[1] "char_at(find_char(ARG2, ARG0), ARG1) : 18"
+[1] "char_at(find_char(ARG2, ARG2), char_at(find_char(ARG2, ARG0), ARG1)) : 1"
+[1] "char_at(find_char(char_at(find_char(ARG2, ARG0), char_at(16, ARG0)), ARG1), char_at(find_char(ARG2, ARG0), ARG1)) : 1"
